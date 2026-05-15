@@ -29,7 +29,7 @@ body {
     padding: 0 40px;
     margin-top: 10px;
     gap: 20px;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .brand-logo {
@@ -41,6 +41,7 @@ body {
     background: #FFEB3B;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     flex-shrink: 0;
+    margin-top: -15px;
 }
 
 .brand-body {

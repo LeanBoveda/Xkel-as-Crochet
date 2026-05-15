@@ -169,7 +169,7 @@ function renderProductos(productos) {
                                 <h3>${p.Nombre}</h3>
 
                                 <span class="price">
-                                    $ ${p.Precio}
+                                     ${p.Precio}
                                 </span>
 
                             </div>

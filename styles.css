@@ -27,7 +27,7 @@ body {
 .brand-header__main-content {
     display: flex;
     padding: 0 40px;
-    margin-top: -75px;
+    margin-top: 10px;
     gap: 20px;
     align-items: flex-end;
 }

@@ -18,7 +18,7 @@ body {
 /* HEADER */
 
 .brand-header__banner {
-    height: 250px;
+    height: 150px;
     background-image: url('fotos/logo2.jpg');
     background-size: cover;
     background-position: center;

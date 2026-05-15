@@ -277,7 +277,7 @@ function abrirModal(producto) {
         .innerText = producto.Nombre;
 
     document.getElementById('modal-price')
-        .innerText = '$ ' + producto.Precio;
+        .innerText = ' ' + producto.Precio;
 
     document.getElementById('modal-description')
         .innerText =

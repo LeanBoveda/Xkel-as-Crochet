@@ -372,7 +372,7 @@ details[open] .arrow-icon {
 #modal-description {
     font-size: 1rem;
     line-height: 1.6;
-    color: #b1afaf;
+color: #444444;
     white-space: pre-wrap;
     margin: 20px 0;
 }

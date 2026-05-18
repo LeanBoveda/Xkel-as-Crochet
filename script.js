@@ -112,7 +112,7 @@ function renderProductos(productos) {
 
         detalles.className = 'category-group';
 
-        detalles.open = true;
+        detalles.open = false;
 
         detalles.innerHTML = `
         
@@ -169,7 +169,7 @@ function renderProductos(productos) {
                                 <h3>${p.Nombre}</h3>
 
                                 <span class="price">
-                                     ${p.Precio}
+                                    $ ${p.Precio}
                                 </span>
 
                             </div>
@@ -277,7 +277,7 @@ function abrirModal(producto) {
         .innerText = producto.Nombre;
 
     document.getElementById('modal-price')
-        .innerText = ' ' + producto.Precio;
+        .innerText = '$ ' + producto.Precio;
 
     document.getElementById('modal-description')
         .innerText =

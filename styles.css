@@ -7,6 +7,92 @@ body {
     color: #333;
 }
 
+/* ==========================
+   Responsive adjustments
+   ========================== */
+
+/* Ensure all images scale down */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .brand-header__banner { height: 200px; }
+    .brand-logo { width: 130px; height: 130px; margin-top: -40px; }
+    .title-area h1 { font-size: 1.9rem; }
+}
+
+@media (max-width: 768px) {
+    .shop-container { margin: 0 12px; max-width: none; }
+
+    .brand-header__main-content {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .brand-logo {
+        width: 120px;
+        height: 120px;
+        margin-top: -35px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .brand-body__top {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .title-area h1 { font-size: 1.6rem; }
+
+    .brand-description p { max-width: 100%; }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        padding: 18px;
+        gap: 16px;
+    }
+
+    .modal-content {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        padding: 16px;
+        border-radius: 0;
+    }
+
+    .modal-image img {
+        width: min(60vw, 240px);
+        height: auto;
+    }
+
+    .shop-controls { flex-wrap: wrap; padding: 12px 20px; }
+    .category-group { margin: 10px 16px; }
+}
+
+@media (max-width: 480px) {
+    .brand-logo { width: 100px; height: 100px; margin-top: -30px; margin-left: auto; margin-right: auto; display: block; }
+    .title-area h1 { font-size: 1.4rem; }
+    .social-btn { width: 34px; height: 34px; }
+    .nav-btn { width: 44px; height: 44px; font-size: 28px; }
+    #prev-img { left: -26px; }
+    #next-img { right: -26px; }
+    .modal-image img { width: min(70vw, 200px); }
+    .add-to-cart-btn { padding: 14px 18px; font-size: 1rem; }
+    .category-select { min-width: 120px; padding: 12px; }
+    .search-input { padding: 12px; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+
 .shop-container {
     max-width: 1100px;
     margin: 0 auto;
@@ -18,7 +104,7 @@ body {
 /* HEADER */
 
 .brand-header__banner {
-    height: 150px;
+    height: 250px;
     background-image: url('fotos/logo2.jpg');
     background-size: cover;
     background-position: center;
@@ -41,7 +127,7 @@ body {
     background: #FFEB3B;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     flex-shrink: 0;
-    margin-top: -15px;
+    margin-top: -45px;
 }
 
 .brand-body {

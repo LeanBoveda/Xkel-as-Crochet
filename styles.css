@@ -72,6 +72,7 @@ img {
     .modal-image img {
         width: min(60vw, 240px);
         height: auto;
+        object-fit: contain;
     }
 
     .shop-controls { flex-wrap: wrap; padding: 12px 20px; }
@@ -270,7 +271,8 @@ details[open] .arrow-icon {
 .product-card img {
     width: 100%;
     aspect-ratio: 1/1;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #fafafa;
     border-radius: 12px;
 }
 
@@ -350,9 +352,11 @@ details[open] .arrow-icon {
 }
 
 .modal-image img {
-    width: 280px;
-    height: 280px;
-    object-fit: cover;
+    width: min(90vw, 380px);
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    background-color: #fafafa;
     border-radius: 15px;
     cursor: zoom-in;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);

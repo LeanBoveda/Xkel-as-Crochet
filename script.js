@@ -263,45 +263,37 @@ function filtrarProductos() {
 ========================= */
 
 function abrirModal(producto) {
-
-    imagenesActuales =
-        producto.Imagen
-            ? producto.Imagen
-                .split(',')
-                .map(img => img.trim())
-            : [];
+    imagenesActuales = producto.Imagen
+        ? producto.Imagen.split(',').map(img => img.trim())
+        : [];
 
     indiceActual = 0;
 
-    document.getElementById('modal-title')
-        .innerText = producto.Nombre;
-
-    document.getElementById('modal-price')
-        .innerText =  producto.Precio;
-
-    document.getElementById('modal-description')
-        .innerText =
-            producto.Descripcion
-            || 'Sin descripción';
+    document.getElementById('modal-title').innerText = producto.Nombre;
+    document.getElementById('modal-price').innerText = producto.Precio;
+    document.getElementById('modal-description').innerText = producto.Descripcion || 'Sin descripción';
 
     actualizarImagenModal();
 
-    const mensaje =
-        `Hola Xkelías Crochet! Me interesa el producto: ${producto.Nombre}`;
+    const mensaje = `Hola Xkelías Crochet! Me interesa el producto: ${producto.Nombre}`;
 
     document.getElementById('btn-whatsapp').onclick = () => {
-
-        window.open(
-            `https://wa.me/543517884074?text=${encodeURIComponent(mensaje)}`,
-            '_blank'
-        );
-
+        window.open(`https://wa.me/543517884074?text=${encodeURIComponent(mensaje)}`, '_blank');
     };
 
-    document.getElementById('product-modal')
-        .style.display = 'block';
+    document.getElementById('product-modal').style.display = 'block';
 
+    // NUEVO: Transforma "Kurama Kyūbi" en "Kurama-Kyūbi" para la URL
+    const urlAmigable = producto.Nombre.trim().replace(/\s+/g, '-');
+    window.location.hash = urlAmigable;
 }
+
+/* Y en tu función de cerrar modal (búscala en tu código), 
+   asegúrate de agregar esta línea para limpiar la URL al cerrar: */
+document.querySelector('.close-modal').onclick = () => {
+    document.getElementById('product-modal').style.display = "none";
+    window.location.hash = ''; // NUEVO: Quita el # de la URL
+};
 
 /* =========================
    ACTUALIZAR IMAGEN MODAL
@@ -401,30 +393,51 @@ document.getElementById('prev-img').onclick = (e) => {
 
 };
 
-/* =========================
-   CERRAR MODAL
-========================= */
+/* ==========================
+   Cierre de Modal y Limpieza de URL
+   ========================== */
 
+// 1. Cierre al hacer clic en el botón (flecha/cruz)
 document.querySelector('.close-modal').onclick = () => {
-
-    document.getElementById('product-modal')
-        .style.display = 'none';
-
+    document.getElementById('product-modal').style.display = 'none';
+    window.location.hash = ''; // NUEVO: Borra el producto de la URL
 };
 
+// 2. Cierre al hacer clic afuera (en el fondo oscuro)
 window.onclick = (event) => {
-
-    if (
-        event.target ===
-        document.getElementById('product-modal')
-    ) {
-
-        document.getElementById('product-modal')
-            .style.display = 'none';
-
+    if (event.target === document.getElementById('product-modal')) {
+        document.getElementById('product-modal').style.display = 'none';
+        window.location.hash = ''; // NUEVO: Borra el producto de la URL
     }
-
 };
+
+
+// NUEVO: Detectar enlaces directos desde Redes Sociales
+async function chequearLinkConHash() {
+    // Le damos un segundo de margen a tu función cargarTienda() para que traiga los productos
+    setTimeout(async () => {
+        // Obtenemos el texto después del # (quitándole el símbolo #)
+        const hashActual = decodeURIComponent(window.location.hash.substring(1));
+        if (!hashActual) return; // Si no hay nada, el usuario entró a la home normal
+
+        // Llamamos a tu API para buscar los datos del producto
+        const respuesta = await fetch(urlAPI);
+        const productos = await respuesta.json();
+
+        // Buscamos el producto que coincida con el nombre transformado en la URL
+        const productoEncontrado = productos.find(p => {
+            return p.Nombre.trim().replace(/\s+/g, '-') === hashActual;
+        });
+
+        // Si existe en el Excel de Agustina, se lo pasamos completo a tu función actual
+        if (productoEncontrado) {
+            abrirModal(productoEncontrado);
+        }
+    }, 1200); // 1.2 segundos de espera prudencial para conexiones móviles
+}
+
+// Escucha cuando la página termina de cargar por completo
+window.addEventListener('load', chequearLinkConHash);
 
 /* =========================
    ZOOM IMAGEN
